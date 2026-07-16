@@ -9,7 +9,7 @@ const Booking = sequelize.define('Booking', {
   },
   userId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,  // guests can book without an account
     references: { model: 'users', key: 'id' },
   },
   roomId: {

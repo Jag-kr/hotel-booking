@@ -1,17 +1,14 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
+import ManageBooking from './pages/ManageBooking';
+import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import { useAuth } from './context/AuthContext';
 
-function ProtectedRoute({ children, adminOnly = false }) {
-  const { user, isAuthenticated, isAdmin } = useAuth();
-  
-  if (!isAuthenticated) return <Navigate to="/login" replace />;
-  if (adminOnly && !isAdmin) return <Navigate to="/" replace />;
-  
+function AdminRoute({ children }) {
+  const { isAuthenticated, isAdmin } = useAuth();
+  if (!isAuthenticated || !isAdmin) return <Navigate to="/admin/login" replace />;
   return children;
 }
 
@@ -20,19 +17,23 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
+        {/* Public routes — no auth needed */}
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        
-        <Route 
-          path="/admin/*" 
+        <Route path="/manage-booking" element={<ManageBooking />} />
+
+        {/* Admin auth */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+
+        {/* Admin protected */}
+        <Route
+          path="/admin"
           element={
-            <ProtectedRoute adminOnly={true}>
+            <AdminRoute>
               <AdminDashboard />
-            </ProtectedRoute>
-          } 
+            </AdminRoute>
+          }
         />
-        
+
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

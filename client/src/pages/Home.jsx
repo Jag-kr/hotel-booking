@@ -1,8 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { hotelAPI, bookingAPI, paymentAPI } from '../api';
 import { useBooking } from '../context/BookingContext';
-import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
 
 const ROOM_IMAGES = {
   'Deluxe Room': 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80',
@@ -237,11 +235,9 @@ function ConfirmationPage({ booking, onNewBooking }) {
   );
 }
 
-// ─── Main Home Component ──────────────────────────────────
+// ─── Main Home Component ──────────────────────────────────────
 function Home() {
   const { bookingState, updateBooking, resetBooking } = useBooking();
-  const { isAuthenticated, user } = useAuth();
-  const navigate = useNavigate();
 
   const {
     step, checkIn, checkOut, guests,
@@ -274,19 +270,7 @@ function Home() {
     }
   }, []);
 
-  // Pre-fill guest form from logged-in user
-  useEffect(() => {
-    if (user) {
-      const parts = (user.name || '').split(' ');
-      setGuestFormData(prev => ({
-        ...prev,
-        firstName: parts[0] || '',
-        lastName: parts.slice(1).join(' ') || '',
-        email: user.email || '',
-        phone: user.phone || '',
-      }));
-    }
-  }, [user]);
+
 
   const searchRooms = async () => {
     if (!checkIn || !checkOut) return;
@@ -325,10 +309,6 @@ function Home() {
   const grandTotal = Math.round(roomTotal + addOnTotal + taxes);
 
   const handleRoomBook = (room) => {
-    if (!isAuthenticated) {
-      navigate('/login');
-      return;
-    }
     updateBooking({ selectedRoom: room, step: 2 });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

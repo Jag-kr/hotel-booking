@@ -12,14 +12,13 @@ API.interceptors.request.use((config) => {
   return config;
 });
 
-// Handle 401 globally
+// Handle 401 — only clear token, don't force-redirect (guests don't need login)
 API.interceptors.response.use(
   (res) => res,
   (err) => {
     if (err.response?.status === 401) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.location.href = '/login';
     }
     return Promise.reject(err);
   }
@@ -44,6 +43,7 @@ export const hotelAPI = {
 // ─── Bookings ─────────────────────────────────────────────
 export const bookingAPI = {
   create: (data) => API.post('/bookings', data),
+  lookup: (ref, email) => API.get('/bookings/lookup', { params: { ref, email } }),
   getMy: () => API.get('/bookings/my'),
   getOne: (id) => API.get(`/bookings/${id}`),
   cancel: (id) => API.put(`/bookings/${id}/cancel`),
