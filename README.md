@@ -21,7 +21,23 @@ A full-stack hotel booking application built to mirror the UX flow of the [Trini
 
 ## 🌟 Project Overview
 
-A full-featured hotel booking web application where guests can search rooms, complete a multi-step booking wizard, and make a dummy payment. Admins can manage rooms, bookings, and customers through a dedicated dashboard.
+Built as a comprehensive submission for the **Senior Full-Stack Developer Assignment (`ABI Technologies`)**, this application is a full-featured hotel booking web platform designed to mirror the reference flow of [Trinity Suites Bangalore](https://hotels.eglobe-solutions.com/trinitysuites/booking/hotels/trinity-suites-bangalore-bangalore?checkIn=26-May-2026&nights=1#bookingsteps).
+
+Guests can search real-time room availability, complete a 4-step booking wizard without mandatory account registration, make a simulated payment, and manage or cancel reservations instantly. Admins get a comprehensive 4-tab staff portal (`Dashboard`, `Bookings`, `Rooms CRUD`, `Customers`) to manage operations.
+
+---
+
+## 🚀 Live Deployed Project
+
+The complete full-stack application (`Frontend`, `REST API`, and `PostgreSQL Database`) is deployed and accessible online:
+
+| Layer | Deployed Platform | Live URL & Status |
+|---|---|---|
+| **Frontend Application** | Vercel (Global Edge CDN) | **[🌐 https://hotel-booking-rho-ten.vercel.app](https://hotel-booking-rho-ten.vercel.app)** |
+| **Backend REST API** | Render Cloud Web Service | **[⚡ https://hotel-booking-meed.onrender.com/api/health](https://hotel-booking-meed.onrender.com/api/health)** |
+| **Database Engine** | Neon Serverless PostgreSQL | **Cloud PostgreSQL 16 Cluster** (Auto-seeded with 9 rooms, users, and reservations) |
+
+> **Note:** The cloud database features automated boot initialization (`seedDatabase()`) and dynamic overlap filtering (`Op.or`) to prevent double-bookings.
 
 ---
 
@@ -165,20 +181,6 @@ Open **http://localhost:5173** in your browser.
 | GET | `/api/health` | Public | Health check |
 
 Full details → [docs/02-solution-design.md](./docs/02-solution-design.md)
-
----
-
-## ☁️ Production Deployment (100% Free Options)
-
-If your Railway or paid cloud trial has expired, you can deploy this full-stack application **for free** in under 10 minutes:
-
-| Component | Free Platform | Setup Instruction |
-|---|---|---|
-| **Database** | **[Neon.tech](https://neon.tech)** | Free Serverless PostgreSQL. Create project & copy `DATABASE_URL`. |
-| **Backend API** | **[Render.com](https://render.com)** | Free Web Service (`server` directory). Set `DATABASE_URL` env var. Auto-seeds on first startup! |
-| **Frontend** | **[Vercel.com](https://vercel.com)** | Free Static Hosting (`client` directory). Set `VITE_API_URL` to your Render API. |
-
-Full step-by-step instructions → [docs/06-deployment.md](./docs/06-deployment.md#star-option-a-100-free-deployment-stack-recommended-if-railway-trial-expired)
 
 ---
 

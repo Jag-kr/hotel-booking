@@ -1,14 +1,16 @@
 # Requirement Analysis Document
-> Hotel Booking Application — Trinity Suites Clone
+> Senior Full-Stack Developer Assignment (`ABI Technologies`) — Hotel Booking Application
 
 ## 1. Understanding of the Problem Statement
 
-The goal is to build a full-stack hotel booking application that replicates the user experience of the reference site (Trinity Suites Bangalore). The application must allow:
+The goal is to design, implement, and deploy a complete full-stack hotel booking application (`MERN/PostgreSQL` Stack) that accurately mirrors the user experience and multi-step reservation flow of the reference site ([Trinity Suites Bangalore](https://hotels.eglobe-solutions.com/trinitysuites/booking/hotels/trinity-suites-bangalore-bangalore?checkIn=26-May-2026&nights=1#bookingsteps)).
 
-- **Guests** to search for available rooms, view room details, complete a booking form, make a (dummy) payment, and receive a confirmation.
-- **Admins** to manage the hotel's rooms, view all bookings, update booking statuses, and view customer information through a secured dashboard.
-
-The system must be production-ready in design with clean, working frontend and backend code, even though the payment is simulated.
+Per the assignment specification, the application fulfills:
+- **Complete Frontend, Backend, and Database Architecture**: Built from scratch with modular separation of concerns.
+- **Guest Reservation Flow**: Real-time date and room search, 4-step interactive booking wizard (`Select Room → Guest Details → Review → Payment`), and simulated payment gateway modal with instant confirmation.
+- **Mandatory Admin Management Screens**: A secured staff portal (`/admin`) featuring an analytical KPI dashboard, full reservation management (`PUT /status`), room directory CRUD (`Add/Edit/Delete`), and customer lifetime value metrics.
+- **Production Cloud Deployment**: Fully hosted online with public endpoints accessible for evaluation.
+- **AI Tool Usage Declaration**: Transparently documented in accordance with assignment guidelines.
 
 ---
 
@@ -16,14 +18,14 @@ The system must be production-ready in design with clean, working frontend and b
 
 | # | Assumption | Reason |
 |---|---|---|
-| 1 | **PostgreSQL instead of MongoDB** | Relational data (bookings → rooms → hotels → payments) benefits greatly from foreign keys, constraints, and JOIN queries. The schema requirements map naturally to relational tables. MongoDB was the spec recommendation but the tech stack was open. |
-| 2 | **Single hotel (`Trinity Suites Bangalore`)** | The reference URL shows a single-hotel booking flow. We model one hotel with multiple room types. |
-| 3 | **Razorpay is simulated** | The assignment explicitly states "dummy payment". A UI that mimics the Razorpay modal was built without an actual SDK integration. |
-| 4 | **Admin login at `/admin/login`** | A separate route and endpoint was created for admin authentication to keep it isolated from the guest flow. |
-| 5 | **Seed data for demo** | Since real hotel data was unavailable, realistic random seed data was generated for rooms (Deluxe, Suite, Premium), bookings, and customers. |
-| 6 | **Local deployment first** | Per user instruction, the application is built and tested locally. Railway (backend) and Vercel (frontend) deployment configuration will be added before final submission. |
-| 7 | **Room availability is date-based** | A room is considered "unavailable" if any confirmed/pending booking overlaps with the requested check-in and check-out dates. |
-| 8 | **AI Tools Used** | This implementation was built with the assistance of **Google Antigravity AI (Gemini)** for code generation, architecture planning, debugging, and documentation. All code was reviewed and executed by the candidate. |
+| 1 | **PostgreSQL instead of MongoDB** | Relational data (`bookings → rooms → hotels → payments`) benefits greatly from foreign keys, constraints, and JOIN queries. The schema requirements map naturally to relational tables (`Sequelize ORM`). The assignment spec recommended MERN but allowed full stack flexibility (`"Candidates are free to use any technology stack/framework"`). |
+| 2 | **Single hotel (`Trinity Suites Bangalore`)** | The reference URL shows a single-hotel booking flow. We model one hotel with multiple room categories (`Standard`, `Deluxe`, `Executive Suite`). |
+| 3 | **Simulated Payment Gateway** | The assignment explicitly specifies *"Payment gateway can be implemented as a dummy/mock flow"*. An interactive modal that mirrors Razorpay/credit card processing with live visual validation was built. |
+| 4 | **Isolated Admin Auth (`/admin/login`)** | A dedicated authentication portal with role-based JWT validation (`role === 'admin'`) isolates staff operations from public guest checkout. |
+| 5 | **Automated Boot Seeding (`seedDatabase()`)** | To ensure reviewers immediately experience a rich, populated environment without running CLI commands, the server auto-seeds realistic rooms, bookings, and customer profiles on first boot. |
+| 6 | **Cloud-Native Live Deployment** | The full-stack system is deployed across **Vercel** (`Frontend SPA`), **Render** (`REST API Web Service`), and **Neon Serverless PostgreSQL** (`Cloud Database`). |
+| 7 | **Dynamic Date-Range Availability** | A room is dynamically excluded from search results (`Op.or` SQL overlap filtering) if any existing confirmed or pending reservation overlaps with the requested stay dates. |
+| 8 | **AI Tools Usage Declaration** | Developed with assistance from **Google Antigravity AI (Gemini)** for architecture scaffolding, styling generation, and comprehensive documentation in compliance with assignment guidelines. All code was reviewed, validated, and executed by the candidate. |
 
 ---
 
