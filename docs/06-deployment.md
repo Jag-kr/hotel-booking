@@ -130,37 +130,65 @@ cd client && npm run dev
 
 ---
 
-## 4. Production Deployment (Planned)
+## 4. Production Deployment Guide (Free & Paid Options)
 
-### Backend → Railway
+Our codebase is fully equipped for **100% Free Tier** deployment using cloud connection strings (`DATABASE_URL`), dynamic CORS, and **automatic initial seeding on startup**.
+
+---
+
+### ⭐ Option A: 100% Free Deployment Stack (Recommended if Railway Trial Expired)
+
+#### 1. Database → Neon.tech (Free Serverless PostgreSQL)
+1. Go to **[neon.tech](https://neon.tech)** and sign up for free with GitHub.
+2. Click **Create Project** → Name it `hotel-booking` → Select region closest to you.
+3. Copy the **Connection String** (`postgres://neondb_owner:xxxxx@ep-xxxx-xxxxx.us-east-2.aws.neon.tech/neondb?sslmode=require`).
+
+#### 2. Backend API → Render.com (Free Web Service)
+1. Go to **[render.com](https://render.com)** and sign up for free with GitHub.
+2. Click **New +** → **Web Service** → Connect your repository `https://github.com/Jag-kr/hotel-booking.git`.
+3. Configure the Web Service:
+   - **Root Directory:** `server`
+   - **Build Command:** `npm install`
+   - **Start Command:** `node index.js`
+4. Under **Environment Variables**, add:
+   ```env
+   DATABASE_URL=postgres://neondb_owner:xxxxx@ep-xxxx-xxxxx.us-east-2.aws.neon.tech/neondb?sslmode=require
+   JWT_SECRET=trinity_suites_prod_jwt_secret_9f8a7c6d5e4b3a2f1e0d9c8b7a6f5e4d3c2b1a
+   NODE_ENV=production
+   ```
+5. Click **Deploy Web Service**. Once deployed, copy your Render API URL (e.g., `https://hotel-booking-backend.onrender.com`).
+   > **Note:** Our backend automatically detects an empty database on first run and auto-seeds all 9 rooms, admin credentials (`admin@hotelbooking.com` / `Admin@123`), and initial bookings!
+
+#### 3. Frontend → Vercel (Free Static Hosting)
+1. Go to **[vercel.com](https://vercel.com)** and import your GitHub repository.
+2. Configure project settings:
+   - **Root Directory:** Click Edit and select `client`
+   - **Framework Preset:** Vite
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist`
+3. Under **Environment Variables**, add your Render API endpoint:
+   ```env
+   VITE_API_URL=https://your-backend-app.onrender.com/api
+   ```
+4. Click **Deploy**. Your full-stack hotel booking engine is now live and completely free!
+
+---
+
+### Option B: Railway Deployment (Alternative)
 
 ```bash
 # Set environment variables in Railway dashboard:
-# DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT (from Railway Postgres plugin)
+# DATABASE_URL (automatically provided when linking Railway Postgres plugin)
 # JWT_SECRET=trinity_suites_prod_jwt_secret_9f8a7c6d5e4b3a2f1e0d9c8b7a6f5e4d3c2b1a
 # NODE_ENV=production
 # PORT=5000 (Railway sets $PORT automatically)
 ```
 
-### Frontend → Vercel
-
-```bash
-# Build command: npm run build
-# Output dir: dist
-# Set in Vercel env vars:
-# VITE_API_URL=https://your-railway-backend.railway.app/api
-```
-
-### Database → Railway PostgreSQL Plugin
-- Add PostgreSQL plugin to Railway project
-- Copy `DATABASE_URL` and parse into individual `DB_*` env vars
-- Run seed after first deploy: `railway run node server/seeders/seed.js`
-
 ---
 
-## 5. Health Check
+## 5. Health Check & Verification
 
-Backend exposes: `GET /api/health`
+Once deployed, test your live backend by visiting `<your-backend-url>/api/health`:
 
 ```json
 { "status": "ok", "timestamp": "2026-07-16T..." }

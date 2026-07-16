@@ -168,9 +168,22 @@ Full details → [docs/02-solution-design.md](./docs/02-solution-design.md)
 
 ---
 
+## ☁️ Production Deployment (100% Free Options)
+
+If your Railway or paid cloud trial has expired, you can deploy this full-stack application **for free** in under 10 minutes:
+
+| Component | Free Platform | Setup Instruction |
+|---|---|---|
+| **Database** | **[Neon.tech](https://neon.tech)** | Free Serverless PostgreSQL. Create project & copy `DATABASE_URL`. |
+| **Backend API** | **[Render.com](https://render.com)** | Free Web Service (`server` directory). Set `DATABASE_URL` env var. Auto-seeds on first startup! |
+| **Frontend** | **[Vercel.com](https://vercel.com)** | Free Static Hosting (`client` directory). Set `VITE_API_URL` to your Render API. |
+
+Full step-by-step instructions → [docs/06-deployment.md](./docs/06-deployment.md#star-option-a-100-free-deployment-stack-recommended-if-railway-trial-expired)
+
+---
+
 ## 🔮 Future Improvements
 
-- Deploy to Vercel (frontend) + Railway (backend) + Supabase/Postgres cloud
 - Printable PDF invoice and booking voucher download
 - Email notifications via SendGrid/AWS SES upon booking confirmation
 - Real Razorpay SDK integration with webhook verification

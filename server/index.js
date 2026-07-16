@@ -3,13 +3,15 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const { sequelize } = require('./models');
+const seedDatabase = require('./seeders/seedFn');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // ─── Middleware ────────────────────────────────────────────
+// Allow requests from Vercel, Netlify, Render, and Localhost dynamic origins
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  origin: (origin, callback) => callback(null, true),
   credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
@@ -41,6 +43,10 @@ async function start() {
     await sequelize.authenticate();
     console.log('✅ Database connected');
     await sequelize.sync({ alter: false });
+    
+    // Automatically check and seed if cloud DB is completely empty on first startup
+    await seedDatabase();
+
     app.listen(PORT, () => {
       console.log(`🚀 Server running at http://localhost:${PORT}`);
     });
