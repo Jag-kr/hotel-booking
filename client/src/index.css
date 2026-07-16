@@ -1093,25 +1093,696 @@ tbody tr:hover { background: var(--bg-light); }
 }
 
 /* ─── Responsive ─────────────────────────────────────────── */
+/* ─── Booking Page Layout ────────────────────────────────── */
+.booking-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 4rem;
+}
+
+.booking-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.booking-sidebar {
+  width: 320px;
+  min-width: 300px;
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 90px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ─── Room Card Updated ──────────────────────────────────── */
+.room-deal-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.deal-tag {
+  background: #ef4444;
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+}
+
+.amenity-ico {
+  font-size: 1.1rem;
+  cursor: default;
+  margin-right: 0.3rem;
+}
+
+.room-action-bar {
+  background: #f8f9fa;
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.room-select-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.select-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.room-qty-select {
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 0.35rem 0.6rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  background: white;
+  cursor: pointer;
+}
+
+.select-plus {
+  color: var(--brand);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* ─── Step 2 Back Bar ────────────────────────────────────── */
+.step2-back {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.step2-room-title {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+/* ─── Section Cards (Step 2) ─────────────────────────────── */
+.section-card {
+  background: white;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.section-header {
+  background: var(--brand);
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.75rem 1.25rem;
+  letter-spacing: 0.01em;
+}
+
+.section-body {
+  padding: 1.25rem;
+}
+
+/* ─── Add-ons ────────────────────────────────────────────── */
+.addon-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.addon-row:last-child { border-bottom: none; }
+
+.addon-checkbox {
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  cursor: pointer;
+  accent-color: var(--brand);
+  flex-shrink: 0;
+}
+
+.addon-label {
+  flex: 1;
+  cursor: pointer;
+}
+
+.addon-name {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.addon-desc {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.1rem;
+}
+
+.addon-pricing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+  min-width: 120px;
+}
+
+.addon-rate {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.addon-total {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ─── Payment Gateway Row ────────────────────────────────── */
+.payment-gateway-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1rem;
+}
+
+.payment-gateway-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.payment-logos {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.payment-logo-badge {
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.terms-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.terms-checkbox input {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--brand);
+  cursor: pointer;
+}
+
+.make-payment-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 2.5rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.make-payment-btn:hover:not(:disabled) {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16,185,129,0.3);
+}
+
+.make-payment-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ─── Policy Text ─────────────────────────────────────────── */
+.policy-text {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.policy-text ul {
+  padding-left: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.policy-text li { margin-bottom: 0.3rem; }
+
+/* ─── Sidebar ─────────────────────────────────────────────── */
+.sidebar-section {
+  background: white;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.sidebar-section-title {
+  background: var(--brand);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.75rem 1rem;
+}
+
+.sidebar-promo .sidebar-section-title + *,
+.sidebar-promo .promo-input-row {
+  padding: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.promo-input-row {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem;
+}
+
+.sidebar-summary {
+  padding-bottom: 0;
+}
+
+.sidebar-summary > *:not(.sidebar-section-title) {
+  padding: 0 1rem;
+}
+
+.summary-dates-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  gap: 0.5rem;
+}
+
+.summary-date-box .sdb-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.summary-date-box .sdb-date {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.nights-pill {
+  background: var(--brand);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.summary-room-name {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  padding: 0 1rem 0.2rem;
+}
+
+.summary-meal-plan {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding: 0 1rem 0.5rem;
+}
+
+.summary-guests-row {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0 1rem 0.75rem;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.summary-guests-row > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  flex: 1;
+}
+
+.summary-guests-row > div > span:last-child {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.summary-divider {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 0 1rem 0.5rem;
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  padding: 0.2rem 1rem;
+}
+
+.summary-line.discount { color: #10b981; }
+
+.summary-grand-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  margin-top: 0.5rem;
+  background: var(--brand);
+  color: white;
+  font-weight: 800;
+  font-size: 0.95rem;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+/* ─── Razorpay Modal ─────────────────────────────────────── */
+.rzp-modal {
+  display: flex;
+  width: 700px;
+  max-width: calc(100vw - 2rem);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+  animation: slideUp 0.3s ease;
+  max-height: 90vh;
+}
+
+.rzp-left {
+  width: 220px;
+  min-width: 220px;
+  background: linear-gradient(160deg, #1a2744 0%, #1a5cff 100%);
+  color: white;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rzp-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.rzp-logo {
+  width: 32px;
+  height: 32px;
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.rzp-price-label {
+  font-size: 0.75rem;
+  opacity: 0.75;
+  margin-bottom: 0.25rem;
+}
+
+.rzp-price-amount {
+  font-size: 1.75rem;
+  font-weight: 800;
+}
+
+.rzp-using {
+  font-size: 0.72rem;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: auto;
+}
+
+.rzp-right {
+  flex: 1;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.rzp-right-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.rzp-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 0.25rem;
+  line-height: 1;
+  transition: color var(--transition);
+}
+
+.rzp-close-btn:hover { color: var(--text-primary); }
+
+.rzp-contact-form, .rzp-payment-options {
+  padding: 1.5rem;
+  flex: 1;
+}
+
+.rzp-input-group {
+  display: flex;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.rzp-country-code {
+  padding: 0.6rem 0.75rem;
+  background: var(--bg-light);
+  border-right: 1px solid var(--border-light);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  color: var(--text-secondary);
+}
+
+.rzp-input-group input {
+  border: none;
+  border-radius: 0;
+  flex: 1;
+}
+
+.rzp-input-group input:focus { box-shadow: none; border: none; }
+
+.rzp-continue-btn {
+  width: 100%;
+  padding: 0.85rem;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.rzp-continue-btn:hover { background: #333; }
+
+.rzp-tabs {
+  display: flex;
+  border-bottom: 1.5px solid var(--border-color);
+  margin-bottom: 1rem;
+  gap: 0;
+}
+
+.rzp-tab {
+  padding: 0.6rem 1rem;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1.5px;
+  transition: all var(--transition);
+}
+
+.rzp-tab.active {
+  color: var(--brand);
+  border-bottom-color: var(--brand);
+}
+
+.rzp-card-form { padding-top: 0.5rem; }
+
+.rzp-card-preview {
+  background: linear-gradient(135deg, #1a2744, #1a5cff);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  color: white;
+  margin-bottom: 0.75rem;
+}
+
+.rzp-pay-btn {
+  width: 100%;
+  padding: 0.85rem;
+  background: linear-gradient(135deg, #1a5cff, #0e2e82);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.rzp-pay-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(26,92,255,0.35);
+}
+
+.rzp-pay-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ─── Confirmation Page ──────────────────────────────────── */
+.confirmation-page {
+  max-width: 640px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.confirmation-card {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 3rem 2.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+}
+
+.confirmation-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.confirmation-details {
+  background: var(--bg-light);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.conf-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.875rem;
+}
+
+.conf-row:last-child { border-bottom: none; }
+.conf-row span { color: var(--text-secondary); }
+.conf-row.conf-total { padding-top: 0.75rem; }
+
+.confirmation-actions { margin: 1.5rem 0; }
+
+.confirmation-policy {
+  background: var(--bg-light);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  text-align: left;
+}
+
+.confirmation-policy p { margin-bottom: 0.25rem; }
+
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .booking-layout { flex-direction: column; }
+  .booking-sidebar { width: 100%; min-width: auto; position: static; max-height: none; }
+}
+
 @media (max-width: 768px) {
   .navbar { flex-wrap: wrap; gap: 0.75rem; }
-  .navbar-tabs { flex-wrap: wrap; }
-
-  .search-bar { padding: 0.75rem; gap: 0.5rem; }
+  .search-bar { padding: 0.75rem; gap: 0.5rem; flex-wrap: wrap; }
   .search-field { min-width: 120px; }
-
   .room-card-inner { flex-direction: column; }
   .room-image-col { width: 100%; min-width: auto; }
   .room-image-col img { height: 200px; }
-
   .auth-left { display: none; }
   .auth-right { width: 100%; padding: 2rem 1.5rem; }
-
   .admin-sidebar { display: none; }
   .admin-main { padding: 1rem; }
-
-  .modal-box { margin: 1rem; max-width: calc(100% - 2rem); }
-
-  .wizard-steps { overflow-x: auto; }
-  .wizard-step { min-width: 80px; }
+  .rzp-modal { flex-direction: column; width: calc(100vw - 2rem); }
+  .rzp-left { width: 100%; min-width: auto; padding: 1.25rem; flex-direction: row; align-items: center; gap: 1rem; }
+  .payment-gateway-row { flex-direction: column; align-items: flex-start; }
+  .room-action-bar { flex-direction: column; align-items: flex-start; }
+  .room-select-controls { flex-wrap: wrap; }
+  .confirmation-card { padding: 2rem 1.25rem; }
 }
