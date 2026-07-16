@@ -66,7 +66,7 @@
 | Assumption | Impact |
 |---|---|
 | Room images use Unsplash placeholder URLs in seed data | Visual but not functional gap; easy to replace |
-| Admin dashboard sidebar navigation is in-page tabs (not separate routes) | Single-page admin experience; simpler UX |
-| Booking requires user login | Prevents anonymous bookings; aligns with typical hotel booking UX |
+| Admin dashboard sidebar navigation uses interactive UI tabs (`Dashboard`, `Bookings`, `Rooms CRUD`, `Customers`) | Single-page admin experience; instant switching without full page reloads |
+| Guest checkout is public (no mandatory user account registration) | Enables frictionless booking matching hotel standard practices; reservations lookup supported via `/manage-booking` with Reference ID & Email |
 | Discount percent field on rooms drives automatic price calculation | Consistent pricing; not explicitly in spec but implied by reference site |
-| Only one admin user seeded; no admin registration endpoint | Admin accounts are provisioned manually; prevents unauthorized admin creation |
+| Only one admin user seeded (`admin@hotelbooking.com`); no public admin registration endpoint | Admin accounts are provisioned manually; prevents unauthorized admin creation |

@@ -34,4 +34,4 @@ The system must be production-ready in design with clean, working frontend and b
 | How many hotels should be supported? | One hotel (Trinity Suites) with multiple room types. |
 | Is payment a real integration? | No. Dummy/mock modal flow confirmed. |
 | What counts as "admin"? | A seeded admin user (`admin@hotelbooking.com`) with role-based JWT middleware. |
-| Is auth required for booking? | Yes. Users must register/login before completing a booking (prevents ghost bookings). |
+| Is auth required for booking? | No. To streamline guest reservations and match reference hotel flows, checkout (`POST /api/bookings`) and payment (`POST /api/payments`) are public. Guests can check and cancel bookings via `/manage-booking` using their Ref Number & Email. |

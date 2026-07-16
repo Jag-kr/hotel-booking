@@ -59,7 +59,7 @@
 | 2 | Register with duplicate email | Returns `409 Email already registered.` |
 | 3 | Login with wrong password | Returns `401 Invalid email or password.` |
 | 4 | Browse rooms without login | Rooms visible (public GET) |
-| 5 | Attempt booking without login | Redirected to `/login` |
+| 5 | Book room without login (guest checkout) | Booking created successfully, ref number generated |
 | 6 | Select room → fill details → confirm → pay | Booking created, payment success, confirmation shown |
 | 7 | Select dates with no available rooms | Shows "No rooms available" message |
 | 8 | Try to book an already-booked room | Returns `409 Room is not available` |
@@ -69,17 +69,18 @@
 |---|---|---|
 | 9 | Login as `admin@hotelbooking.com` | JWT with `role: 'admin'`, redirected to dashboard |
 | 10 | View dashboard stats | Correct counts and revenue shown |
-| 11 | View all bookings | Paginated list with guest info and status badges |
-| 12 | Update booking status to Cancelled | Booking record updated, badge changes |
+| 11 | View all bookings & change status via UI dropdown | Status instantly updated in DB and UI badge |
+| 12 | Create new room inventory via UI Add Modal | Room created, added to database and visible to guests |
 | 13 | Non-admin user hits `/api/admin/stats` | Returns `403 Access denied. Admins only.` |
-| 14 | View customer list | All users with booking count and spend |
+| 14 | View customer directory tab | All registered users + guest checkout customers aggregated with booking count and spend |
 
 ---
 
 ## 4. Key User Flows Tested
 
-- [x] Registration → Login → Room search → Booking → Payment → (Confirmation)
-- [x] Admin login → Dashboard stats loaded → Booking table rendered
+- [x] Guest checkout without account → Room search → Booking → Mock Payment → Instant Confirmation
+- [x] Manage My Booking lookup using Ref Number & Email → Cancel reservation
+- [x] Admin login (`/admin/login`) → Dashboard stats loaded → Bookings table status control
+- [x] Admin Room CRUD (Add Room popup, Edit Room pricing, Delete Room)
 - [x] Attempting double booking on same room/dates → Conflict detected
-- [x] Token expiry → Auto redirect to login (via Axios interceptor)
-- [x] Admin CRUD on rooms (via API — UI pending)
+- [x] Fallback JWT_SECRET handling during admin token signing & verification

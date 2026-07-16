@@ -44,27 +44,21 @@
 
 | Limitation | Notes |
 |---|---|
-| **Admin UI tabs are not routed** | Sidebar links in Admin Dashboard are `<a href="#">` placeholders. Full sub-page routing (Rooms, Customers, Bookings tabs) needs implementation. |
-| **No "My Bookings" page** | The API exists but the UI page hasn't been built. |
-| **No Booking Confirmation page** | After payment, a simple `alert()` is shown. A proper confirmation card with booking ID is needed. |
-| **Room CRUD has no UI** | The Add/Edit/Delete room endpoints work but there are no forms in the Admin Dashboard. |
-| **Room images are placeholder URLs** | Unsplash random URLs are used. Production would need a file upload solution (S3/Cloudinary). |
-| **No mobile-responsive testing** | CSS breakpoints are written but not verified on real devices. |
+| **Room images are external URLs** | Unsplash/hosted image URLs are used. Production would benefit from direct file upload (e.g. S3/Cloudinary). |
+| **No automated E2E test suite** | Playwright/Cypress end-to-end automated scripts not yet written; manual verification completed across all scenarios. |
 
 ---
 
 ## 4. Future Improvements
 
 1. **Deployment** — Deploy backend to Railway, frontend to Vercel, database as Railway Postgres plugin
-2. **Email Notifications** — Booking confirmation email via SendGrid/Nodemailer
-3. **Razorpay Integration** — Replace mock with real Razorpay SDK for actual payment testing
-4. **Admin Room Management UI** — Full CRUD form for rooms in the dashboard
-5. **My Bookings Page** — Guest view of all past/upcoming bookings with cancel option
-6. **Image Upload** — Cloudinary or AWS S3 for room images
-7. **TypeScript Migration** — Add types to the Express API and React components
-8. **Automated Tests** — Jest for API unit tests, Playwright for E2E booking flow
-9. **Rate Limiting** — Express rate-limit middleware to prevent abuse
-10. **Refresh Tokens** — Short-lived access tokens + refresh token rotation for better security
+2. **Email Notifications** — Booking confirmation email via SendGrid/AWS SES upon booking completion
+3. **Razorpay Integration** — Replace simulated modal with real Razorpay SDK for live card/UPI transaction testing
+4. **Image Upload Service** — Cloudinary or AWS S3 integration for drag-and-drop room photo uploads
+5. **TypeScript Migration** — Add types to the Express API and React components for enhanced compile-time safety
+6. **Automated Tests** — Jest for API unit tests, Playwright for end-to-end booking & admin flow automation
+7. **Rate Limiting & Security** — Express rate-limit middleware + Helmet to prevent DDoS and API abuse
+8. **Refresh Tokens** — Short-lived access tokens + refresh token rotation for enterprise-grade security
 
 ---
 

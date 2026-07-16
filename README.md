@@ -31,14 +31,27 @@ A full-featured hotel booking web application where guests can search rooms, com
 - 🔍 **Search rooms** by check-in date, check-out date, and number of guests
 - 🏠 **Browse available rooms** with type, price, capacity, and amenities
 - 📝 **4-step booking wizard** (Select Room → Guest Details → Review → Payment)
+- 🔓 **Guest checkout (No auth needed)** — Book freely without creating an account
 - 💳 **Simulated Razorpay payment** modal with live card preview
-- 🔐 **Secure auth** — JWT-based register/login
+- ⚡ **Instant confirmation** screen with Booking Ref Number (`#000013`), stay dates, and payment status
+- 📋 **Manage My Booking (`/manage-booking`)** — Look up any booking using Ref Number & Email, view details, and cancel if needed
 
 ### Admin
-- 📊 **Dashboard statistics** — total rooms, available rooms, total bookings, revenue
-- 📋 **All bookings** table — view guest info, dates, and statuses
-- 🏨 **Room management** — Add, edit, delete rooms via API
-- 👥 **Customer management** — View all guests with booking history
+- 📊 **Dashboard Overview (`📊 Dashboard`)** — KPI stat cards (total rooms, available rooms, bookings, revenue) + recent bookings
+- 📅 **Booking Management (`📅 Bookings`)** — Filter bookings (`All`, `Pending`, `Confirmed`, `Cancelled`) + instant status update dropdown
+- 🛏️ **Room Management (`🛏️ Rooms CRUD`)** — Add new rooms via popup modal, edit pricing/descriptions, and delete rooms
+- 👥 **Customer Management (`👥 Customers`)** — Directory aggregating registered accounts and guest checkouts with booking counts & total spent
+
+---
+
+## 📸 Screenshots & Flow Verification
+
+| Screen | Description |
+|---|---|
+| **Public Booking Engine (`/`)** | 4-step wizard matching reference UI with check-in, room selection, guest info, and Razorpay modal. |
+| **Manage My Booking (`/manage-booking`)** | Guest lookup page by Reference Number and Email with full reservation breakdown. |
+| **Admin Login (`/admin/login`)** | Discreet staff portal with pre-filled default credentials (`admin@hotelbooking.com` / `Admin@123`). |
+| **Admin Dashboard (`/admin`)** | 4 interactive tabs (`Dashboard`, `Bookings`, `Rooms CRUD`, `Customers`) for full hotel management. |
 
 ---
 
@@ -90,7 +103,7 @@ DB_USER=jagjeet
 DB_PASSWORD=jagjeet123
 DB_HOST=127.0.0.1
 DB_PORT=5432
-JWT_SECRET=your_secret_key_here
+JWT_SECRET=super_secret_jwt_key_trinity_suites_2026
 JWT_EXPIRES_IN=7d
 ADMIN_EMAIL=admin@hotelbooking.com
 ADMIN_PASSWORD=Admin@123
@@ -121,10 +134,9 @@ Open **http://localhost:5173** in your browser.
 
 ## 🔑 Default Login Credentials
 
-| Role | Email | Password |
-|---|---|---|
-| Admin | `admin@hotelbooking.com` | `Admin@123` |
-| Guest | `ravi@example.com` | `Guest@123` |
+| Portal | Email | Password | Role |
+|---|---|---|---|
+| **Admin Portal (`/admin/login`)** | `admin@hotelbooking.com` | `Admin@123` | Hotel Staff / Administrator |
 
 ---
 
@@ -141,10 +153,11 @@ Open **http://localhost:5173** in your browser.
 | POST | `/api/rooms` | Admin | Create room |
 | PUT | `/api/rooms/:id` | Admin | Update room |
 | DELETE | `/api/rooms/:id` | Admin | Delete room |
-| POST | `/api/bookings` | User | Create booking |
+| POST | `/api/bookings` | Public | Create guest booking |
+| GET | `/api/bookings/lookup` | Public | Lookup booking by Ref + Email |
 | GET | `/api/bookings/my` | User | My bookings |
-| PUT | `/api/bookings/:id/cancel` | User | Cancel booking |
-| POST | `/api/payments` | User | Process payment |
+| PUT | `/api/bookings/:id/cancel` | Public/Admin | Cancel booking |
+| POST | `/api/payments` | Public | Process guest payment |
 | GET | `/api/admin/stats` | Admin | Dashboard stats |
 | GET | `/api/admin/bookings` | Admin | All bookings |
 | PUT | `/api/admin/bookings/:id/status` | Admin | Update status |
@@ -157,13 +170,11 @@ Full details → [docs/02-solution-design.md](./docs/02-solution-design.md)
 
 ## 🔮 Future Improvements
 
-- Booking confirmation page with printable voucher
-- "My Bookings" page for guests
-- Admin CRUD UI for rooms and customers
-- Deploy to Vercel (frontend) + Railway (backend)
-- Email notifications via SendGrid
-- Real Razorpay SDK integration
-- Automated tests (Jest + Playwright)
+- Deploy to Vercel (frontend) + Railway (backend) + Supabase/Postgres cloud
+- Printable PDF invoice and booking voucher download
+- Email notifications via SendGrid/AWS SES upon booking confirmation
+- Real Razorpay SDK integration with webhook verification
+- Automated integration and E2E testing (Jest + Playwright)
 
 ---
 
