@@ -78,24 +78,63 @@ const updateBookingStatus = async (req, res) => {
 // GET /api/admin/customers
 const getCustomers = async (req, res) => {
   try {
-    const customers = await User.findAll({
-      where: { role: 'user' },
-      attributes: { exclude: ['password'] },
-      include: [{
-        model: Booking,
-        as: 'bookings',
-        attributes: ['id', 'totalAmount', 'bookingStatus', 'paymentStatus', 'createdAt'],
-      }],
+    const allBookings = await Booking.findAll({
       order: [['createdAt', 'DESC']],
     });
 
-    const customersWithStats = customers.map(c => ({
-      ...c.toJSON(),
-      totalBookings: c.bookings.length,
-      totalSpent: c.bookings.filter(b => b.paymentStatus === 'Paid').reduce((sum, b) => sum + parseFloat(b.totalAmount || 0), 0),
-    }));
+    const customerMap = new Map();
 
-    res.json(customersWithStats);
+    // Add registered users first
+    const registeredUsers = await User.findAll({
+      where: { role: 'user' },
+      attributes: { exclude: ['password'] },
+    });
+
+    for (const u of registeredUsers) {
+      customerMap.set(u.email.toLowerCase(), {
+        id: u.id,
+        name: u.name,
+        email: u.email,
+        phone: u.phone || '-',
+        location: u.location || '-',
+        registered: true,
+        totalBookings: 0,
+        totalSpent: 0,
+        lastBookingDate: null,
+      });
+    }
+
+    // Aggregate bookings by guestEmail
+    for (const b of allBookings) {
+      const emailKey = (b.guestEmail || '').toLowerCase().trim();
+      if (!emailKey) continue;
+
+      if (!customerMap.has(emailKey)) {
+        customerMap.set(emailKey, {
+          id: `guest_${b.id}`,
+          name: b.guestName || 'Guest User',
+          email: b.guestEmail,
+          phone: b.guestPhone || '-',
+          location: '-',
+          registered: false,
+          totalBookings: 0,
+          totalSpent: 0,
+          lastBookingDate: b.createdAt,
+        });
+      }
+
+      const cust = customerMap.get(emailKey);
+      cust.totalBookings += 1;
+      if (b.paymentStatus === 'Paid') {
+        cust.totalSpent += parseFloat(b.totalAmount || 0);
+      }
+      if (!cust.lastBookingDate || new Date(b.createdAt) > new Date(cust.lastBookingDate)) {
+        cust.lastBookingDate = b.createdAt;
+      }
+    }
+
+    const customersList = Array.from(customerMap.values());
+    res.json(customersList);
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch customers.', error: err.message });
   }
