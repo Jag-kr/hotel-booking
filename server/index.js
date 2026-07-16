@@ -19,14 +19,30 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ─── Routes ───────────────────────────────────────────────
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api', require('./routes/hotels'));
-app.use('/api/bookings', require('./routes/bookings'));
-app.use('/api/payments', require('./routes/payments'));
-app.use('/api/admin', require('./routes/admin'));
+// Mount routes with AND without /api prefix so both /rooms and /api/rooms work!
+const authRoutes = require('./routes/auth');
+const hotelRoutes = require('./routes/hotels');
+const bookingRoutes = require('./routes/bookings');
+const paymentRoutes = require('./routes/payments');
+const adminRoutes = require('./routes/admin');
+
+app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
+
+app.use('/api/bookings', bookingRoutes);
+app.use('/bookings', bookingRoutes);
+
+app.use('/api/payments', paymentRoutes);
+app.use('/payments', paymentRoutes);
+
+app.use('/api/admin', adminRoutes);
+app.use('/admin', adminRoutes);
+
+app.use('/api', hotelRoutes);
+app.use('/', hotelRoutes);
 
 // Health check
-app.get('/api/health', (req, res) => res.json({ status: 'ok', timestamp: new Date() }));
+app.get(['/api/health', '/health'], (req, res) => res.json({ status: 'ok', timestamp: new Date() }));
 
 // ─── 404 Handler ──────────────────────────────────────────
 app.use((req, res) => res.status(404).json({ message: `Route ${req.path} not found` }));

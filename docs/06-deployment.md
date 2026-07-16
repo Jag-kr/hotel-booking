@@ -174,18 +174,6 @@ Our codebase is fully equipped for **100% Free Tier** deployment using cloud con
 
 ---
 
-### Option B: Railway Deployment (Alternative)
-
-```bash
-# Set environment variables in Railway dashboard:
-# DATABASE_URL (automatically provided when linking Railway Postgres plugin)
-# JWT_SECRET=trinity_suites_prod_jwt_secret_9f8a7c6d5e4b3a2f1e0d9c8b7a6f5e4d3c2b1a
-# NODE_ENV=production
-# PORT=5000 (Railway sets $PORT automatically)
-```
-
----
-
 ## 5. Health Check & Verification
 
 Once deployed, test your live backend by visiting `<your-backend-url>/api/health`:
