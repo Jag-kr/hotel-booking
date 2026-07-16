@@ -1,14 +1,25 @@
 const { Payment, Booking, Room, Hotel } = require('../models');
 
-// POST /api/payments  — mock Razorpay payment
+// POST /api/payments  — public or optional auth for guest checkout
 const processPayment = async (req, res) => {
   try {
     const { bookingId, paymentMethod, cardNumber, cardName, expiryMonth, expiryYear, cvv } = req.body;
 
+    if (!bookingId) {
+      return res.status(400).json({ message: 'Booking ID is required.' });
+    }
+
     const booking = await Booking.findByPk(bookingId);
     if (!booking) return res.status(404).json({ message: 'Booking not found.' });
-    if (booking.userId !== req.user.id) return res.status(403).json({ message: 'Access denied.' });
-    if (booking.paymentStatus === 'Paid') return res.status(400).json({ message: 'Booking is already paid.' });
+    
+    // If the booking is tied to a user account and user is logged in, verify ownership
+    if (booking.userId && req.user && booking.userId !== req.user.id && req.user.role !== 'admin') {
+      return res.status(403).json({ message: 'Access denied.' });
+    }
+
+    if (booking.paymentStatus === 'Paid') {
+      return res.status(400).json({ message: 'Booking is already paid.' });
+    }
 
     // Simulate payment processing delay + success
     const transactionId = `PAY_${Date.now()}_${Math.random().toString(36).substr(2, 8).toUpperCase()}`;
