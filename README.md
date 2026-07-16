@@ -77,7 +77,7 @@ A full-featured hotel booking web application where guests can search rooms, com
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/<your-username>/hotel-booking.git
+git clone https://github.com/Jag-kr/hotel-booking.git
 cd hotel-booking
 ```
 
@@ -103,7 +103,7 @@ DB_USER=jagjeet
 DB_PASSWORD=jagjeet123
 DB_HOST=127.0.0.1
 DB_PORT=5432
-JWT_SECRET=super_secret_jwt_key_trinity_suites_2026
+JWT_SECRET=trinity_suites_prod_jwt_secret_9f8a7c6d5e4b3a2f1e0d9c8b7a6f5e4d3c2b1a
 JWT_EXPIRES_IN=7d
 ADMIN_EMAIL=admin@hotelbooking.com
 ADMIN_PASSWORD=Admin@123

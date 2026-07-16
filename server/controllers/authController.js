@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'super_secret_jwt_key_trinity_suites_2026';
+const JWT_SECRET = process.env.JWT_SECRET || 'trinity_suites_prod_jwt_secret_9f8a7c6d5e4b3a2f1e0d9c8b7a6f5e4d3c2b1a';
 
 const generateToken = (user) =>
   jwt.sign({ id: user.id, role: user.role }, JWT_SECRET, {

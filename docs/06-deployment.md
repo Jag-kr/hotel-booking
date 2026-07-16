@@ -13,7 +13,7 @@
 ### Step 1: Clone and Install
 
 ```bash
-git clone https://github.com/<your-username>/hotel-booking.git
+git clone https://github.com/Jag-kr/hotel-booking.git
 cd hotel-booking
 
 # Install backend dependencies
@@ -62,7 +62,7 @@ DB_HOST=127.0.0.1
 DB_PORT=5432
 
 # JWT
-JWT_SECRET=your_super_secret_key_change_in_production
+JWT_SECRET=trinity_suites_prod_jwt_secret_9f8a7c6d5e4b3a2f1e0d9c8b7a6f5e4d3c2b1a
 JWT_EXPIRES_IN=7d
 
 # Admin seed user
@@ -137,7 +137,7 @@ cd client && npm run dev
 ```bash
 # Set environment variables in Railway dashboard:
 # DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT (from Railway Postgres plugin)
-# JWT_SECRET (strong random value)
+# JWT_SECRET=trinity_suites_prod_jwt_secret_9f8a7c6d5e4b3a2f1e0d9c8b7a6f5e4d3c2b1a
 # NODE_ENV=production
 # PORT=5000 (Railway sets $PORT automatically)
 ```
