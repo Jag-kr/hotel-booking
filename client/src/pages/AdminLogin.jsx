@@ -3,8 +3,8 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 function AdminLogin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('admin@hotelbooking.com');
+  const [password, setPassword] = useState('Admin@123');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { adminLogin } = useAuth();
@@ -30,6 +30,21 @@ function AdminLogin() {
         <div className="admin-login-logo">🏨</div>
         <h2 className="admin-login-title">Admin Portal</h2>
         <p className="admin-login-subtitle">Trinity Suites — Staff Access Only</p>
+
+        <div style={{
+          background: 'var(--bg-light)',
+          border: '1px dashed var(--border-color)',
+          borderRadius: 'var(--radius-sm)',
+          padding: '0.75rem',
+          marginBottom: '1.25rem',
+          fontSize: '0.78rem',
+          textAlign: 'left',
+          color: 'var(--text-secondary)'
+        }}>
+          <div style={{ fontWeight: 700, color: 'var(--brand)', marginBottom: '0.2rem' }}>🔑 Default Admin Credentials:</div>
+          <div><strong>Email:</strong> admin@hotelbooking.com</div>
+          <div><strong>Password:</strong> Admin@123</div>
+        </div>
 
         {error && <div className="form-error" style={{ marginBottom: '1rem' }}>{error}</div>}
 
